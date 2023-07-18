@@ -1,9 +1,15 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Welcome from "./views/Login";
+
 function App() {
-  return (
-    <div className="App">
-      <div>hello</div>
-    </div>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Welcome />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

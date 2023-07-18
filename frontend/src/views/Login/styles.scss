@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  
+  .image-container {
+    display: flex;
+    width: 50vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #052E1C;
+    overflow-y: hidden;
+
+    img {
+      width: 40vw;
+    }
+  }
+
+  .welcome-container {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .welcome-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+  
+      .title-subtitle {
+        color: #052E1C;
+        font-size: 2rem;
+        font-weight: 500;
+  
+        .subtitle {
+          color: #737373;
+          font-size: 1.2rem;
+          margin-bottom: 0rem;
+  
+          .subtitle-2 {
+            margin-top: 2%;
+          }
+        }
+  
+      }
+  
+      .login-register-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-top: 5rem;
+  
+        .button-container {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 2rem;
+  
+          .title-button {
+            display: flex;
+            color: #737373;
+            font-size: 1.2rem;
+    
+            .bold {
+              margin-left: 0.2rem;
+              color:#353535;
+              font-weight: 700;
+            }
+          }
+        }
+  
+        button {
+          color: white;
+          width: 330px;
+        }
+  
+        .button-login {
+          button {
+            background-color: #a7bc52;
+          }
+        }
+      }
+    }
+  }
+}
