@@ -2,20 +2,6 @@
   display: flex;
   width: 100vw;
   height: 100vh;
-  
-  .image-container {
-    display: flex;
-    width: 50vw;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #052E1C;
-    overflow-y: hidden;
-
-    img {
-      width: 40vw;
-    }
-  }
 
   .welcome-container {
     width: 50vw;
@@ -29,23 +15,6 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-  
-      .title-subtitle {
-        color: #052E1C;
-        font-size: 2rem;
-        font-weight: 500;
-  
-        .subtitle {
-          color: #737373;
-          font-size: 1.2rem;
-          margin-bottom: 0rem;
-  
-          .subtitle-2 {
-            margin-top: 2%;
-          }
-        }
-  
-      }
   
       .login-register-container {
         display: flex;

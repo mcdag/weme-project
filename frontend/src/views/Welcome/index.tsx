@@ -1,8 +1,7 @@
-import React from "react";
-import Logo from "../../assets/logo.svg";
-import World from "../../assets/world.svg";
-import "./styles.scss";
+import ImageContainer from "../../components/ImageContainer";
 import Button from "../../components/Button";
+import TitleAndSubtitle from "../../components/TitleAndSubtitle";
+import "./styles.scss";
 
 function Welcome() {
   const handleClickLogin = async () => {
@@ -15,23 +14,10 @@ function Welcome() {
 
   return (
     <div className="container">
-      <div className="image-container">
-        <img src={Logo} alt="Logo em texto"/>
-        <img src={World} alt="Planeta em cores verdes" />
-      </div>
+      <ImageContainer/>
       <div className="welcome-container">
         <div className="welcome-box">
-          <div className="title-subtitle">
-            <p className="title">
-              Bem-vindo!
-              <p className="subtitle"> 
-                Utilize o Credencials by Weme para
-                <p className="subtitle-2"> 
-                  para salvar suas credenciais!
-                </p>
-              </p>
-            </p>
-          </div>
+        <TitleAndSubtitle title="Bem vindo!" subtitle1="Utilize o Credencials by Weme para" subtitle2="salvar suas credenciais" />
           <div className="login-register-container">
             <div className="button-container">
                 <div className="title-button">
@@ -43,7 +29,7 @@ function Welcome() {
                   </p>
                 </div>
                 <div className="button">
-                  <Button type="submit" onClick={handleClickRegister} text="Entrar"/>
+                  <Button type="submit" onClick={handleClickLogin} text="Entrar"/>
                 </div>
               </div>
               <div className="button-container">
