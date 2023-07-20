@@ -1,0 +1,26 @@
+.navbar {
+  width: 100vw;
+  height: 3.5rem;
+  background-color: #052E1C;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .avatar-email {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+
+    .email {
+      margin-left: 20px;
+      color:white;
+    }
+  }
+  .logout-button {
+    margin: 10px;
+
+    button {
+      color: white;
+    }
+  }
+}

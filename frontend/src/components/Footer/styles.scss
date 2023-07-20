@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .footer {
+    width: 100vw;
+    background-color: #052E1C;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    
+    .footer-logo {
+      margin: 15px;
+    }
+  }
+}
