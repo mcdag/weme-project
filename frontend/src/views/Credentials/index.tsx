@@ -28,7 +28,7 @@ function Credentials() {
   )
 
   return (
-    <div className="container">
+    <div className="credentials-container">
       <Navbar email={"mcdag@cin.ufpe"} onClick={handleLogout}/>
       <div className="table">
         <div className="title">

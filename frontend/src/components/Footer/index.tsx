@@ -3,8 +3,8 @@ import './styles.scss';
 
 function Footer() {
   return (
-    <div className="footer">
-      <img className="footer-logo" src={whiteLogo} />
+    <div className="footer-container">
+      <img alt="logo" className="footer-logo" src={whiteLogo} />
     </div>
   );
 };
