@@ -1,9 +1,10 @@
-import { Alert, Checkbox, FormControlLabel, TextField } from "@mui/material";
+import { Alert, Checkbox, FormControlLabel, IconButton, TextField } from "@mui/material";
 import { useState } from "react";
 import { Auth } from "../../interfaces/user";
 import { UserService } from "../../services/userService";
 import Button from "../../components/Button";
 import Cookies from "js-cookie";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ImageContainer from "../../components/ImageContainer";
 import TitleAnsSubtitle from "../../components/TitleAndSubtitle";
 import "./styles.scss"
@@ -21,7 +22,11 @@ function Login() {
     setPassword(event.target.value);
   };
 
-  const handleClick = (async () => {
+  const handleClickBack = (() => {
+    window.history.back();
+  })
+
+  const handleClickLogin = (async () => {
     const login: Auth = {
       email: email,
       password: password,
@@ -40,12 +45,17 @@ function Login() {
     <div className="container">
       <ImageContainer/>
       <div className="login-container">
+        <div className="arrow-button">
+          <IconButton aria-label="back" size="medium" onClick={handleClickBack}>
+            <ArrowBackIosIcon fontSize="inherit" />
+          </IconButton>
+        </div>
         <div className="login-box">
           <TitleAnsSubtitle title="Faça login!" subtitle1="Bem-vindo de volta," subtitle2="sentimos sua falta!" />
           <div className="invalid-auth">
             {
               error ?
-              <Alert sx={{width: "100%", justifyContent: "center"}} severity="error">Email ou senha inválidos</Alert> :
+              <Alert sx={{width: "100%", justifyContent: "center"}} severity="error">Email ou senha inválidos!</Alert> :
               <></>
             }
           </div>
@@ -66,7 +76,7 @@ function Login() {
               label="Lembrar-me" />
           </div>
           <div className="button-login">
-            <Button type="submit" onClick={handleClick} text="Entrar"/>
+            <Button type="submit" onClick={handleClickLogin} text="Entrar"/>
           </div>
           <div className='registration-text'>
             <p className='button-text'>Não tem uma conta?</p>
