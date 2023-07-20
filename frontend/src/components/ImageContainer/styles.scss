@@ -1,0 +1,13 @@
+.image-container {
+  display: flex;
+  width: 50vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #052E1C;
+  overflow-y: hidden;
+
+  img {
+    width: 40vw;
+  }
+}
