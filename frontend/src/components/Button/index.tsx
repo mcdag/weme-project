@@ -4,12 +4,13 @@ import './styles.scss';
 interface IButtonProps {
   type: "submit" | "button",
   onClick?: React.MouseEventHandler<HTMLButtonElement>,
-  text: string
+  text: string,
+  disabled?: boolean
 }
 
-function Button({ type, onClick, text }: IButtonProps) {
+function Button({ type, onClick, text, disabled }: IButtonProps) {
   return (
-    <button type={type} onClick={onClick} className='main-button'>
+    <button disabled={disabled} type={type} onClick={onClick} className='main-button'>
       {text}
     </button>
   );
