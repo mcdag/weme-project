@@ -1,7 +1,9 @@
-import { Column, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Credential } from "./Credential";
 
+
+@Entity()
 export class CreditCard {
 	@PrimaryColumn()
 		id: string;

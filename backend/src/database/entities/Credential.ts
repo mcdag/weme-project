@@ -1,7 +1,9 @@
-import { Column, CreateDateColumn, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { User } from "./User";
 
+
+@Entity()
 export class Credential {
 	@PrimaryColumn()
 		id: string;
