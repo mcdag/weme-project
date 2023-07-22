@@ -8,8 +8,8 @@ export class Credential {
 	@PrimaryColumn()
 		id: string;
 
-	@Column()
-		user_id: string;
+	@Column({ name: "user_id"})
+		userId: string;
 
 	@ManyToOne(()=>User)
 	@JoinColumn({ name: "user_id"})
@@ -21,8 +21,8 @@ export class Credential {
 	@Column()
 		title: string;
 
-	@CreateDateColumn()
-		created_at: Date;
+	@CreateDateColumn({ name: "created_at"})
+		createdAt: Date;
 
 	constructor(){
 		if(!this.id) {

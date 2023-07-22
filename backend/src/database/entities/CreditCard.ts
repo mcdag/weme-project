@@ -8,8 +8,8 @@ export class CreditCard {
 	@PrimaryColumn()
 		id: string;
 
-	@Column()
-		credential_id: string;
+	@Column({ name: "credential_id"})
+		credentialId: string;
 
 	@ManyToOne(()=>Credential)
 	@JoinColumn({ name: "credential_id"})
@@ -24,8 +24,8 @@ export class CreditCard {
 	@Column()
 		cvv: string;
 
-	@Column()
-		expiration_data: string;
+	@Column({ name: "expiration_date"})
+		expirationDate: string;
 	
 	@Column()
 		password: string;
