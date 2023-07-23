@@ -33,10 +33,9 @@ export class UserService {
 
 	async getUserLogin({email, password}: UserLogin): Promise<User | Error> {
 		const repo = dataSource.getRepository(User);
+		const user = await repo.findOne({ where: {email: email} });
 
-		const user = await repo.findOne({ where: {email} });
-
-		if(user.password != password) {
+		if(user.password !== password) {
 			return new Error("Passwords do not match");
 		}
 

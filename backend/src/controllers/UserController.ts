@@ -1,30 +1,40 @@
 import { Request, Response } from "express";
 import { UserService } from "../services/UserService";
+import { User } from "../database/entities/User";
 
 export class UserController {
 	async createUser(req: Request, res: Response){
 		const { name, email, password } = req.body;
-		const service = new UserService();
-		const result = await service.createUser({name, email, password});
+		const result = await new UserService().createUser({name, email, password});
+		let response: User | string;
+		let status: number;
 
 		if(result instanceof Error){
-			return res.sendStatus(400).json(result.message);
+			response = result.message;
+			status = 400;
+		} else {
+			response = result;
+			status = 201;
 		}
 
-		res.send(201).json(result);
-		return;
+		return res.json(response).status(status);
 	}
 
 	async getUserLogin(req: Request, res: Response){
 		const { email, password } = req.body;
-		const service = new UserService();
-		const result = await service.getUserLogin({email, password});
+		const result = await new UserService().getUserLogin({email, password});
+		let response: User | string;
+		let status: number;
+
 
 		if(result instanceof Error){
-			return res.sendStatus(400).json(result.message);
+			response = result.message;
+			status = 400;
+		} else {
+			response = result;
+			status = 200;
 		}
 
-		res.send(200).json(result);
-		return;
+		return res.json(response).status(status);
 	}
 }

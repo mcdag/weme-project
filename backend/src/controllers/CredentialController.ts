@@ -24,46 +24,60 @@ export class CredentialController {
 	async createCredential(req: Request, res: Response){
 		const service = new CredentialService();
 		const result = await service.createCredential(req.body as CredentialType);
+		let response: Credential | string;
+		let status: number;
 
 		if(result instanceof Error){
-			return res.sendStatus(400).json(result.message);
+			response = result.message;
+			status = 400;
+		}else{
+			response = result;
+			status = 201;
 		}
 
-		res.send(201).json(result);
-		return;
+		return res.json(response).status(status);
 	}
 
 	async getCredentials(req: Request, res: Response){
 		const service = new CredentialService();
 		const result = await service.getCredentials();
 		
-		res.send(200).json(result);
-		return;
+		return res.json(result).status(200);
 	}
 
 	async updateCredential(req: Request, res: Response){
 		const { id, credential } = req.body;
 		const service = new CredentialService();
 		const result = await service.updateCredential(id, credential as CredentialType);
+		let response: Credential | string;
+		let status: number;
 
-		if(result instanceof Error){
-			return res.sendStatus(400).json(result.message);
+		if (result instanceof Error) {
+			response = result.message;
+			status = 400;
+		} else {
+			response = result;
+			status = 200;
 		}
 
-		res.send(200).json(result);
-		return;
+		return res.json(response).status(status);
 	}
 
 	async deleteCredential(req: Request, res: Response){
 		const { id } = req.body;
 		const service = new CredentialService();
 		const result = await service.deleteCredential(id);
+		let response: Credential | string;
+		let status: number;
 
 		if(result instanceof Error){
-			return res.sendStatus(400).json(result.message);
+			response = result.message;
+			status = 400;
+		}else{
+			response = result;
+			status = 204;
 		}
 
-		res.send(204).json(result);
-		return;
+		return res.json(response).status(status);
 	}
 }
