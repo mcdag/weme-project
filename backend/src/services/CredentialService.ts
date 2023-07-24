@@ -11,6 +11,10 @@ export class CredentialService {
 	async createCredential({userId, type, title, credentialEmail, credentialCreditCard}: CredentialType): Promise<Credential | Error> {
 		const repo = dataSource.getRepository(Credential);
 		const user = await dataSource.getRepository(User).findOne({ where: {id: userId} });
+
+		if(!user) {
+			return new Error("There is no user with that id");
+		}
 		let credential: Credential;
 
 		if(credentialEmail) {
@@ -36,14 +40,16 @@ export class CredentialService {
 
 	async getCredentials(){
 		const repo = dataSource.getRepository(Credential);
-		const result =  await repo.find({relations: ["email", "credit_card"]});
+		const result =  await repo.find({relations: ["email", "creditCard"]});
 
 		return result;
 	}
 
-	async updateCredential(id: string, {type, title, emailId, credentialEmail, creditCardId, credentialCreditCard}: CredentialType): Promise<Credential | Error> {
+	async updateCredential(id: string, {type, title, credentialEmail, credentialCreditCard}: CredentialType): Promise<Credential | Error> {
 		const repo = dataSource.getRepository(Credential);
 		const credential = await repo.findOne({ where: {id} });
+
+		console.log(credential);
 
 		if(!credential) {
 			return new Error("There is no credential with that id");
@@ -55,10 +61,11 @@ export class CredentialService {
 		let cred: Email | CreditCard | Error;
 
 		if(credentialEmail) {
-			const email = await dataSource.getRepository(Email).findOne({where: { id: emailId }});
+			const email = await dataSource.getRepository(Email).findOne({where: { id: credential.emailId }});
+			console.log(email);
 			cred = await new EmailService().updateEmail(email, credentialEmail as EmailType);
 		} else if(credentialCreditCard) {
-			const creditCard = await dataSource.getRepository(CreditCard).findOne({ where: { id: creditCardId }});
+			const creditCard = await dataSource.getRepository(CreditCard).findOne({ where: { id: credential.creditCardId }});
 			cred = await new CreditCardService().updateCreditCard(creditCard, credentialCreditCard as CreditCardType);
 		}
 
@@ -73,11 +80,14 @@ export class CredentialService {
 	async deleteCredential(id: string): Promise<string | Error> {
 		const repo = dataSource.getRepository(Credential);
 		const credential = await repo.findOne({where: { id }});
+		
 		let cred: string | Error;
 
 		if(!credential) {
 			return new Error("There is no credential with that id");
 		}
+		
+		await repo.delete({id});
 
 		if(credential.emailId) {
 			cred = await new EmailService().deleteEmail(credential.emailId);
@@ -89,8 +99,6 @@ export class CredentialService {
 		if(cred instanceof Error) {
 			return new Error(cred.message);
 		}
-
-		await repo.delete({id});
 
 		return id;
 	}
