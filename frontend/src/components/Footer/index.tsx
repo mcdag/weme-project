@@ -4,7 +4,7 @@ import './styles.scss';
 function Footer() {
   return (
     <div className="footer-container">
-      <img alt="logo" className="footer-logo" src={whiteLogo} />
+      <img alt="logo" className="footer-logo" width="100" height="20" src={whiteLogo} />
     </div>
   );
 };
