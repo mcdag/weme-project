@@ -58,6 +58,16 @@ export class CredentialsService {
     return response;
   }
 
+  static async getCredential(id: string): Promise<AxiosResponse<GetCredential>> {
+    const response = await apiBack.get(
+      `/credential/${id}`,
+      {
+        validateStatus: status => [200, 400, 500].includes(status),
+      },
+    );
+    return response;
+  }
+
 	static async createCredential(data : SendCredential ): Promise<AxiosResponse<GetCredential[]>> {
     const response = await apiBack.post(
       '/credentials', data, 
