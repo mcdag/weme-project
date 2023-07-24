@@ -19,7 +19,7 @@ npm run start
 
 ### Database visualization
 
-If you want to look at the database, go this link https://dbdiagram.io/d/644c21d2dca9fb07c439f32e.
+If you want to look at the database diagram, go this link https://dbdiagram.io/d/644c21d2dca9fb07c439f32e.
 
 ### Docker installings
 
@@ -41,10 +41,10 @@ After you have make the connection, create a database with name 'credentials'.
 ### Running the backend
 
 ```
-# First of all, run the migrations
-npm run typeorm migration:run
-
-# Then, just run these comands and the server will start
+# First install the project dependecies
 npm i
+
+# Then, run the migrations and run the server and it will start
+npm run typeorm migration:run
 npm run dev
 ```
