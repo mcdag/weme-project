@@ -26,14 +26,14 @@ export class Credential {
 	@Column({ name: "email_id", nullable: true})
 		emailId: string;
 
-	@OneToOne(()=>Email, { onDelete: "CASCADE" })
+	@OneToOne(()=>Email)
 	@JoinColumn({ name: "email_id"})
 		email: Email;
 	
 	@Column({ name: "credit_card_id", nullable: true})
 		creditCardId: string;
 
-	@OneToOne(()=>CreditCard, { onDelete: "CASCADE" })
+	@OneToOne(()=>CreditCard)
 	@JoinColumn({ name: "credit_card_id"})
 		creditCard: CreditCard;
 
