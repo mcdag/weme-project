@@ -1,17 +1,14 @@
 .footer-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
-  .footer {
-    width: 100vw;
-    background-color: #052E1C;
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
+  justify-content: center;
+  background-color: #052E1C;
+  height: 3.5rem;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
     
-    .footer-logo {
-      margin: 15px;
-    }
+  .footer-logo {
+    margin: 15px;
   }
 }
