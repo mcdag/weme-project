@@ -42,7 +42,6 @@ function Login() {
     if (response.status !== 200) {
       setError(true)
     } else {
-      console.log(response.data);
       Cookies.set("id", response.data.id);
       Cookies.set("email", response.data.email);
       if(checkbox) {
@@ -75,7 +74,7 @@ function Login() {
             }
           </div>
           <div className="text-fields">
-            <TextField sx={{marginBottom: "5%"}} className="text-field" label="Email" variant="outlined" onChange={handleChangeEmail} />
+            <TextField sx={{marginBottom: "5%"}} type="email" className="text-field" label="Email" variant="outlined" onChange={handleChangeEmail} />
             <TextField type="password" className="text-field" label="Senha" variant="outlined" onChange={handleChangePassword} />
             <FormControlLabel control=
               {

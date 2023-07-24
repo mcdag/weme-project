@@ -15,7 +15,6 @@ interface IProps {
   handleFunction: React.MouseEventHandler;
 }
 export default function EditCredentialDialog({ credential, open, handleFunction}: IProps) {
-  console.log("aaaaaa", credential)
   const [title, setTitle] = React.useState<string>(credential?.title || "");
   const [email, setEmail] = React.useState<string>(credential?.email || "");
   const [url, setUrl] = React.useState<string>(credential?.url || "");
