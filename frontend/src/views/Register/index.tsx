@@ -87,10 +87,6 @@ function Register() {
       setEmailError(true)
     } else {
       window.location.replace(`${window.location.origin}/auth/login`);
-      Cookies.set("id", response.data.id);
-      Cookies.set("name", response.data.name);
-      Cookies.set("email", response.data.email);
-      Cookies.set("password", response.data.password);
     }
 
   })

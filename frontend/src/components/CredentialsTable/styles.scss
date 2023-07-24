@@ -1,5 +1,14 @@
 .table-container {
+  display: flex;
   width: 100vw;
   display: flex;
   justify-content: center;
+
+  .add-icon {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    color: #052E1C;
+    margin-inline-end: 3rem;
+  }
 }

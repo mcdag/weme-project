@@ -1,43 +1,73 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import { CredentialsService } from "../../services/credentialsService copy";
 import Cookies from "js-cookie";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import CredentialsTable, { CredentialType } from "../../components/CredentialsTable";
+import CredentialsTable , {CredentialType} from "../../components/CredentialsTable";
+import { IconButton } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 import "./styles.scss"
+import CreateCredentialDialog from "../../components/CreateCredentialDialog copy";
 
 function Credentials() {
-  const [credentials, setCredentials] = useState<string[]>([]);
+  const [createCredentialDialog, setCreateCredentialDialog] = useState(false);
+  const [credentials, setCredentials] = useState<CredentialType[]>([]);
+  const id = Cookies.get("id");
   const email = Cookies.get("email");
 
-  const a : CredentialType[] = [
-    { id: "1", createdAt: "99/03", type: 'Hello', title: 'World', email: "maria@cin.ufpe.br", url:"kakskaka", number:"9393923", name: "mcdag", cvv:"15/07", expirationDate: "82/09", password: "9394u2u" },
-    { id: "2", createdAt: "99/03", type: 'DataGridPro', title: 'is Awesome', email: "maria@cin.ufpe.br", url:"kakskaka", number:"9393923", name: "mcdag", cvv:"15/07", expirationDate: "82/09", password: "9394u2u" },
-    { id: "3", createdAt: "99/03", type: 'MUI', title: 'is Amazing', email: "maria@cin.ufpe.br", url:"kakskaka", number:"9393923", name: "mcdag", cvv:"15/07", expirationDate: "82/09", password: "9394u2u" },
-  ];
-
-  const handleChangeCredentials = async () => {
-    const email = Cookies.get("email");
-    const response = await CredentialsService.getCredentials(email || "");
+  async function get() {
+    const response = await CredentialsService.getCredentials(id || "");
     if (response.status === 200) {
-      setCredentials(response.data);
+      const data: CredentialType[] = response.data.map(val => { return {
+        id: val.id,
+        createdAt: (new Date(val.createdAt)).toLocaleDateString('pt-Br'),
+        type: val.type === "email" ? "Email" : "Cartão",
+        title: val.title,
+        email: val.email ?  val.email.email : "-" ,
+        url: val.email ?  val.email.url : "-",
+        number: val.creditCard ?  val.creditCard.number : "-",
+        name: val.creditCard ?  val.creditCard.name : "-",
+        cvv: val.creditCard ?  val.creditCard.cvv : "-",
+        expirationDate: val.creditCard ?  val.creditCard.expirationDate : "-",
+        password: val.email ?  val.email.password : val.creditCard ? val.creditCard.password : "-",
+      }});
+
+      setCredentials(data);
     }
   };
 
   const handleLogout = async () => {
     window.location.replace(`${window.location.origin}/`);
+    Cookies.remove("id");
   }
+
+  const handleClickOpenCreateCredentialDialog = () => {
+    setCreateCredentialDialog(!createCredentialDialog);
+  };
+
+
+  useEffect(() => {
+    get();
+  }, [get]);
 
   return (
     <div className="credentials-container">
-      <Navbar email={"mcdag@cin.ufpe"} onClick={handleLogout}/>
+      <Navbar email={email || "fulano@gmail.com"} onClick={handleLogout}/>
       <div className="table-container">
         <div className="title">
           <p> Credenciais </p>
         </div>
+        {createCredentialDialog && (
+          <CreateCredentialDialog open={createCredentialDialog} handleFunction={handleClickOpenCreateCredentialDialog} />
+        )}
+        <div className="add-icon">
+          <IconButton aria-label="create-credential" size="large" onClick={handleClickOpenCreateCredentialDialog}>
+            <AddIcon fontSize="inherit" />
+          </IconButton>
+        </div>
         <div className="table">
-          < CredentialsTable rows={a} />
+          < CredentialsTable rows={credentials} />
         </div>
       </div>
       <Footer />
