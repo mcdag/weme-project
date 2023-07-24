@@ -34,7 +34,7 @@ export class CredentialController {
 			status = 201;
 		}
 
-		return res.json(response).status(status);
+		return res.send(response).status(status);
 	}
 
 	async getCredentials(req: Request, res: Response){
@@ -42,7 +42,7 @@ export class CredentialController {
 		const service = new CredentialService();
 		const result = await service.getCredentials(id);
 		
-		return res.json(result).status(200);
+		return res.send(result).status(200);
 	}
 
 	async updateCredential(req: Request, res: Response){
@@ -60,7 +60,7 @@ export class CredentialController {
 			status = 200;
 		}
 
-		return res.json(response).status(status);
+		return res.send(response).status(status);
 	}
 
 	async deleteCredential(req: Request, res: Response){
@@ -78,6 +78,6 @@ export class CredentialController {
 			status = 204;
 		}
 
-		return res.json(response).status(status);
+		return res.send(response).status(status);
 	}
 }
