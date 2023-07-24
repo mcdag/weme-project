@@ -5,7 +5,7 @@ import { CredentialController } from "./controllers/CredentialController";
 const routes = Router();
 
 routes.post("/users", new UserController().createUser);
-routes.get("/users", new UserController().getUserLogin);
+routes.post("/auth", new UserController().getUserLogin);
 routes.post("/credentials", new CredentialController().createCredential);
 routes.get("/credentials/:id", new CredentialController().getCredentials);
 routes.put("/credentials/:id", new CredentialController().updateCredential);
