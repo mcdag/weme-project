@@ -25,10 +25,9 @@ function Credentials() {
     }
   };
 
-  const handleLogout = (async () => {
-    window.location.replace(`${window.location.origin}/welcome`);
-    }
-  )
+  const handleLogout = async () => {
+    window.location.replace(`${window.location.origin}/`);
+  }
 
   return (
     <div className="credentials-container">

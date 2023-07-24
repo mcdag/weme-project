@@ -13,12 +13,19 @@ function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
+  const [checkbox, setCheckbox] = useState<boolean>(false)
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(error) {
+      setError(false);
+    }
     setEmail(event.target.value);
   };
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(error) {
+      setError(false);
+    }
     setPassword(event.target.value);
   };
 
@@ -35,11 +42,19 @@ function Login() {
     if (response.status !== 200) {
       setError(true)
     } else {
-      window.location.replace(`${window.location.origin}/credentials`);
+      console.log(response.data);
+      Cookies.set("id", response.data.id);
       Cookies.set("email", response.data.email);
-      Cookies.set("password", response.data.password);
+      if(checkbox) {
+        Cookies.set("password", response.data.password);
+      }
+      window.location.replace(`${window.location.origin}/credentials`);
     }
   })
+
+  const handleClickCheckBox = () => {
+    setCheckbox(!checkbox);
+  }
 
   return (
     <div className="container">
@@ -70,7 +85,8 @@ function Login() {
                     color: "#052E1C",
                   },
                 }}
-                defaultChecked 
+                checked={checkbox}
+                onClick={handleClickCheckBox}
                 />
               } 
               label="Lembrar-me" />

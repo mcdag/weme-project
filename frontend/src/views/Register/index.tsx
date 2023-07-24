@@ -22,6 +22,9 @@ function Register() {
   };
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(emailError) {
+      setEmailError(false);
+    }
     setEmail(event.target.value);
   };
 
@@ -74,21 +77,22 @@ function Register() {
   })
 
   const handleClickRegister = (async () => {
-    console.log("oie")
     const user: User = {
       name: name,
       email: email,
       password: password,
     }
     const response = await UserService.createUser(user);
-    if (response.status !== 200) {
+    if (response.status !== 201) {
       setEmailError(true)
     } else {
       window.location.replace(`${window.location.origin}/auth/login`);
+      Cookies.set("id", response.data.id);
       Cookies.set("name", response.data.name);
       Cookies.set("email", response.data.email);
       Cookies.set("password", response.data.password);
     }
+
   })
 
   return (
