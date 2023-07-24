@@ -86,6 +86,6 @@ export class CredentialController {
 			status = 204;
 		}
 
-		return res.send(response).status(status);
+		return res.send({id: response}).status(status);
 	}
 }
