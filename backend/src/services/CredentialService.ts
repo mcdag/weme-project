@@ -38,10 +38,10 @@ export class CredentialService {
 		return credential;
 	}
 
-	async getCredentials(){
+	async getCredentials(id: string){
 		const repo = dataSource.getRepository(Credential);
-		const result =  await repo.find({relations: ["email", "creditCard"]});
-
+		const result =  await repo.find({relations: ["email", "creditCard"], where: { userId: id}});
+		
 		return result;
 	}
 

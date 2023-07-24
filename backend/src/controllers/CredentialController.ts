@@ -38,8 +38,9 @@ export class CredentialController {
 	}
 
 	async getCredentials(req: Request, res: Response){
+		const { id } = req.params;
 		const service = new CredentialService();
-		const result = await service.getCredentials();
+		const result = await service.getCredentials(id);
 		
 		return res.json(result).status(200);
 	}
