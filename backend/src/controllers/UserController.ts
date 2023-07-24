@@ -17,7 +17,7 @@ export class UserController {
 			status = 201;
 		}
 
-		return res.json(response).status(status);
+		return res.status(status).send(response);
 	}
 
 	async getUserLogin(req: Request, res: Response){
@@ -35,6 +35,6 @@ export class UserController {
 			status = 200;
 		}
 
-		return res.json(response).status(status);
+		return res.send(response).status(status);
 	}
 }
