@@ -44,6 +44,7 @@ After you have make the connection, create a database with name 'credentials'.
 # First of all, run the migrations
 npm run typeorm migration:run
 
-# Then, just run that comand and the server will start
+# Then, just run these comands and the server will start
+npm i
 npm run dev
 ```
