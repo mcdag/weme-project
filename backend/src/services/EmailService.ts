@@ -1,4 +1,3 @@
-import { Credential } from "../database/entities/Credential";
 import { Email } from "../database/entities/Email";
 import dataSource from "../ormconfig";
 
@@ -9,18 +8,21 @@ export type EmailType = {
 }
 
 export class EmailService {
-	async createEmail(credential: Credential, {email, url, password}: EmailType): Promise<Email | Error> {
+	async createEmail({email, url, password}: EmailType): Promise<Email | Error> {
 		const repo = dataSource.getRepository(Email);
 
 		const mail = repo.create({
-			credential,
 			email,
 			url,
 			password
 		});
 
 		await repo.save(mail);
-		
+
+		if(!mail.id) {
+			return new Error("Email could not be saved");
+		}
+
 		return mail;
 	}
 

@@ -5,18 +5,20 @@ export type CredentialType = {
 	userId?: string;
 	type: string;
 	title: string;
-	credentialEmail?: {
+	emailId?: string;
+	credentialEmail: {
 		email: string;
 		url: string;
 		password: string;
-	},
+	} | null;
+	creditCardId?: string;
 	credentialCreditCard?: {
 		number: string;
 		name: string;
 		cvv: string;
 		expirationDate: string;
 		password: string;
-	}
+	} | null;
 }
 
 export class CredentialController {
@@ -30,7 +32,7 @@ export class CredentialController {
 		if(result instanceof Error){
 			response = result.message;
 			status = 400;
-		}else{
+		} else{
 			response = result;
 			status = 201;
 		}
@@ -46,9 +48,9 @@ export class CredentialController {
 	}
 
 	async updateCredential(req: Request, res: Response){
-		const { id, credential } = req.body;
+		const { id } = req.params;
 		const service = new CredentialService();
-		const result = await service.updateCredential(id, credential as CredentialType);
+		const result = await service.updateCredential(id, req.body as CredentialType);
 		let response: Credential | string;
 		let status: number;
 
@@ -64,7 +66,7 @@ export class CredentialController {
 	}
 
 	async deleteCredential(req: Request, res: Response){
-		const { id } = req.body;
+		const { id } = req.params;
 		const service = new CredentialService();
 		const result = await service.deleteCredential(id);
 		let response: Credential | string;

@@ -1,4 +1,3 @@
-import { Credential } from "../database/entities/Credential";
 import { CreditCard } from "../database/entities/CreditCard";
 import dataSource from "../ormconfig";
 
@@ -11,11 +10,10 @@ export type CreditCardType = {
 }
 
 export class CreditCardService {
-	async createCreditCard(credential: Credential, {number, name, cvv, expirationDate, password}: CreditCardType): Promise<CreditCard | Error> {
+	async createCreditCard({number, name, cvv, expirationDate, password}: CreditCardType): Promise<CreditCard | Error> {
 		const repo = dataSource.getRepository(CreditCard);
 
 		const creditCard = repo.create({
-			credential,
 			number,
 			name,
 			cvv,
@@ -24,6 +22,10 @@ export class CreditCardService {
 		});
 
 		await repo.save(creditCard);
+
+		if(!creditCard.id) {
+			return new Error("Credit card could not be saved");
+		}
 		
 		return creditCard;
 	}
