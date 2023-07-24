@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateCredential1690033782139 implements MigrationInterface {
+export class CreateCredential1690156134738 implements MigrationInterface {
 
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.createTable(
@@ -25,6 +25,16 @@ export class CreateCredential1690033782139 implements MigrationInterface {
 						type: "varchar",
 					},
 					{
+						name: "email_id",
+						type: "uuid",
+						isNullable: true,
+					},
+					{
+						name: "credit_card_id",
+						type: "uuid",
+						isNullable: true,
+					},
+					{
 						name: "created_at",
 						type: "timestamp",
 						default: "now()"
@@ -35,6 +45,18 @@ export class CreateCredential1690033782139 implements MigrationInterface {
 						name: "fk_credential_user",
 						columnNames: ["user_id"],
 						referencedTableName: "user",
+						referencedColumnNames: ["id"]
+					},
+					{
+						name: "fk_credential_email",
+						columnNames: ["email_id"],
+						referencedTableName: "email",
+						referencedColumnNames: ["id"]
+					},
+					{
+						name: "fk_credential_credit_card",
+						columnNames: ["credit_card_id"],
+						referencedTableName: "credit_card",
 						referencedColumnNames: ["id"]
 					}
 				]

@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateEmail1690033797729 implements MigrationInterface {
+export class CreateEmail1690156063984 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.createTable(
 			new Table({
@@ -10,10 +10,6 @@ export class CreateEmail1690033797729 implements MigrationInterface {
 						name: "id",
 						type: "uuid",
 						isPrimary: true
-					},
-					{
-						name: "credential_id",
-						type: "uuid",
 					},
 					{
 						name: "email",
@@ -26,16 +22,13 @@ export class CreateEmail1690033797729 implements MigrationInterface {
 					{
 						name: "password",
 						type: "varchar",
+					},
+					{
+						name: "created_at",
+						type: "timestamp",
+						default: "now()"
 					}
 				],
-				foreignKeys: [
-					{
-						name: "fk_email_credential",
-						columnNames: ["credential_id"],
-						referencedTableName: "credential",
-						referencedColumnNames: ["id"]
-					}
-				]
 			})
 		);
 	}

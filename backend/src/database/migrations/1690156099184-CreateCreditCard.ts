@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateCreditCard1690033791063 implements MigrationInterface {
+export class CreateCreditCard1690156099184 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.createTable(
 			new Table({
@@ -10,10 +10,6 @@ export class CreateCreditCard1690033791063 implements MigrationInterface {
 						name: "id",
 						type: "uuid",
 						isPrimary: true
-					},
-					{
-						name: "credential_id",
-						type: "uuid",
 					},
 					{
 						name: "number",
@@ -34,16 +30,13 @@ export class CreateCreditCard1690033791063 implements MigrationInterface {
 					{
 						name: "password",
 						type: "varchar",
+					},
+					{
+						name: "created_at",
+						type: "timestamp",
+						default: "now()"
 					}
 				],
-				foreignKeys: [
-					{
-						name: "fk_credit_card_credential",
-						columnNames: ["credential_id"],
-						referencedTableName: "credential",
-						referencedColumnNames: ["id"]
-					}
-				]
 			})
 		);
 	}
