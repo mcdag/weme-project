@@ -29,7 +29,7 @@ export class EmailService {
 	async updateEmail(mail: Email, {email, url, password}: EmailType): Promise<Email | Error> {
 		const repo = dataSource.getRepository(Email);
 
-		if(mail) {
+		if(!mail) {
 			return new Error("There is no email with that id");
 		}
 

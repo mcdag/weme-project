@@ -5,13 +5,11 @@ export type CredentialType = {
 	userId?: string;
 	type: string;
 	title: string;
-	emailId?: string;
 	credentialEmail: {
 		email: string;
 		url: string;
 		password: string;
 	} | null;
-	creditCardId?: string;
 	credentialCreditCard?: {
 		number: string;
 		name: string;
@@ -22,7 +20,6 @@ export type CredentialType = {
 }
 
 export class CredentialController {
-
 	async createCredential(req: Request, res: Response){
 		const service = new CredentialService();
 		const result = await service.createCredential(req.body as CredentialType);
